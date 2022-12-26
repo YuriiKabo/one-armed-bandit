@@ -29,7 +29,7 @@ refs.btnStart.addEventListener('click', onStartGame);
 refs.topUpBtn.addEventListener('click', onCallPrompt);
 let investScore = 0;
 function onCallPrompt() {
-  let result = prompt('Поповніть рахунок!', 100);
+  let result = prompt('Поповніть рахунок!', 20);
   refs.scoreNum.textContent = Number(result);
   refs.restNum.textContent = Number(result);
   investScore = Number(result);
