@@ -1,21 +1,21 @@
 {
-  "name": "jack",
+  "name": "bandit",
   "version": "2.0.0",
-  "description": "This project was created with Parcel. For familiarization and setting additional features [refer to documentation](https://parceljs.org/).",
-  "homepage": "https://yuriikabo.github.io/jack/",
+  "description": "",
+  "homepage": "https://yuriikabo.github.io/bandit/",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /jack/"
+    "build": "parcel build src/*.html --public-url /bandit/"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/YuriiKabo/jack.git"
+    "url": "git+https://github.com/YuriiKabo/bandit.git"
   },
   "keywords": [],
-  "author": "Alexander Repeta <alexander.repeta@gmail.com>",
+  "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/YuriiKabo/jack/issues"
+    "url": "https://github.com/YuriiKabo/bandit/issues"
   },
   "dependencies": {
     "flatpickr": "^4.6.13",
