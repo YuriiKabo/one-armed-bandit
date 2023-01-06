@@ -110,18 +110,25 @@ function onStartThirdRandom() {
 function numsEqSimbols1() {
   const random1 = parseInt(Math.random() * 6);
   let simbolOne = 0;
-  if (random1 === 0) {
-    simbolOne = '🍔';
-  } else if (random1 === 1) {
-    simbolOne = '🍋';
-  } else if (random1 === 2) {
-    simbolOne = '🍒';
-  } else if (random1 === 3) {
-    simbolOne = '🇺🇦';
-  } else if (random1 === 4) {
-    simbolOne = '🍺';
-  } else if (random1 === 5) {
-    simbolOne = '💰';
+  switch (random1) {
+    case 0:
+      simbolOne = '🍔';
+      break;
+    case 1:
+      simbolOne = '🍋';
+      break;
+    case 2:
+      simbolOne = '🍒';
+      break;
+    case 3:
+      simbolOne = '🇺🇦';
+      break;
+    case 4:
+      simbolOne = '🍺';
+      break;
+    case 5:
+      simbolOne = '💰';
+      break;
   }
 
   refs.leftSimbol.textContent = simbolOne;
@@ -130,18 +137,25 @@ function numsEqSimbols1() {
 function numsEqSimbols2() {
   const random1 = parseInt(Math.random() * 6);
   let simbolTwo = 0;
-  if (random1 === 0) {
-    simbolTwo = '🍔';
-  } else if (random1 === 1) {
-    simbolTwo = '🍋';
-  } else if (random1 === 2) {
-    simbolTwo = '🍒';
-  } else if (random1 === 3) {
-    simbolTwo = '🇺🇦';
-  } else if (random1 === 4) {
-    simbolTwo = '🍺';
-  } else if (random1 === 5) {
-    simbolTwo = '💰';
+  switch (random1) {
+    case 0:
+      simbolTwo = '🍔';
+      break;
+    case 1:
+      simbolTwo = '🍋';
+      break;
+    case 2:
+      simbolTwo = '🍒';
+      break;
+    case 3:
+      simbolTwo = '🇺🇦';
+      break;
+    case 4:
+      simbolTwo = '🍺';
+      break;
+    case 5:
+      simbolTwo = '💰';
+      break;
   }
 
   refs.centerSimbol.textContent = simbolTwo;
@@ -149,20 +163,26 @@ function numsEqSimbols2() {
 function numsEqSimbols3() {
   const random1 = parseInt(Math.random() * 6);
   let simbolThree = 0;
-  if (random1 === 0) {
-    simbolThree = '🍔';
-  } else if (random1 === 1) {
-    simbolThree = '🍋';
-  } else if (random1 === 2) {
-    simbolThree = '🍒';
-  } else if (random1 === 3) {
-    simbolThree = '🇺🇦';
-  } else if (random1 === 4) {
-    simbolThree = '🍺';
-  } else if (random1 === 5) {
-    simbolThree = '💰';
+  switch (random1) {
+    case 0:
+      simbolThree = '🍔';
+      break;
+    case 1:
+      simbolThree = '🍋';
+      break;
+    case 2:
+      simbolThree = '🍒';
+      break;
+    case 3:
+      simbolThree = '🇺🇦';
+      break;
+    case 4:
+      simbolThree = '🍺';
+      break;
+    case 5:
+      simbolThree = '💰';
+      break;
   }
-
   refs.rightSimbol.textContent = simbolThree;
 }
 
