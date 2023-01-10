@@ -9,7 +9,7 @@ const refs = {
   restNum: document.querySelector('.rest-num'),
   gameResult: document.querySelector('.your-win-numb'),
 };
-
+// console.log(Object.keys(refs));
 disabledBtnStart();
 
 document.addEventListener('keydown', e => {
@@ -49,8 +49,10 @@ function onStartGame() {
   onStartSecondRandom();
   onStartThirdRandom();
   on();
-  invertCountDown();
   totalResult();
+  setTimeout(() => {
+    invertCountDown();
+  }, 300);
 }
 
 function totalResult() {
@@ -83,7 +85,7 @@ function disabledBtnStart() {
 
 function onStartFirstRandom() {
   const intId = setInterval(() => {
-    numsEqSimbols1();
+    numsEqSimbols1(parseInt(Math.random() * 6));
     setTimeout(() => {
       clearInterval(intId);
     }, 1300);
@@ -91,7 +93,7 @@ function onStartFirstRandom() {
 }
 function onStartSecondRandom() {
   const intId = setInterval(() => {
-    numsEqSimbols2();
+    numsEqSimbols2(parseInt(Math.random() * 6));
     setTimeout(() => {
       clearInterval(intId);
     }, 2000);
@@ -100,17 +102,16 @@ function onStartSecondRandom() {
 
 function onStartThirdRandom() {
   const intId = setInterval(() => {
-    numsEqSimbols3();
+    numsEqSimbols3(parseInt(Math.random() * 6));
     setTimeout(() => {
       clearInterval(intId);
     }, 2700);
   }, 70);
 }
 
-function numsEqSimbols1() {
-  const random1 = parseInt(Math.random() * 6);
+function numsEqSimbols1(random) {
   let simbolOne = 0;
-  switch (random1) {
+  switch (random) {
     case 0:
       simbolOne = '🍔';
       break;
@@ -134,10 +135,9 @@ function numsEqSimbols1() {
   refs.leftSimbol.textContent = simbolOne;
 }
 
-function numsEqSimbols2() {
-  const random1 = parseInt(Math.random() * 6);
+function numsEqSimbols2(random) {
   let simbolTwo = 0;
-  switch (random1) {
+  switch (random) {
     case 0:
       simbolTwo = '🍔';
       break;
@@ -160,10 +160,9 @@ function numsEqSimbols2() {
 
   refs.centerSimbol.textContent = simbolTwo;
 }
-function numsEqSimbols3() {
-  const random1 = parseInt(Math.random() * 6);
+function numsEqSimbols3(random) {
   let simbolThree = 0;
-  switch (random1) {
+  switch (random) {
     case 0:
       simbolThree = '🍔';
       break;
@@ -189,111 +188,71 @@ function numsEqSimbols3() {
 function on() {
   let score = 0;
   setTimeout(() => {
-    if (
-      refs.leftSimbol.textContent === '🍔' &&
-      refs.centerSimbol.textContent === '🍔' &&
-      refs.rightSimbol.textContent === '🍔'
-    ) {
+    const left = refs.leftSimbol.textContent;
+    const center = refs.centerSimbol.textContent;
+    const right = refs.rightSimbol.textContent;
+    if (left === '🍔' && center === '🍔' && right === '🍔') {
       score = 7;
-      const totalScore = score + Number(refs.scoreNum.textContent);
-      refs.scoreNum.textContent = totalScore;
-    } else if (
-      refs.leftSimbol.textContent === '💰' &&
-      refs.centerSimbol.textContent === '💰' &&
-      refs.rightSimbol.textContent === '💰'
-    ) {
+      addScore(score);
+    } else if (left === '💰' && center === '💰' && right === '💰') {
       score = 12;
-      const totalScore = score + Number(refs.scoreNum.textContent);
-      refs.scoreNum.textContent = totalScore;
-    } else if (
-      refs.leftSimbol.textContent === '🍺' &&
-      refs.centerSimbol.textContent === '🍺' &&
-      refs.rightSimbol.textContent === '🍺'
-    ) {
+      addScore(score);
+    } else if (left === '🍺' && center === '🍺' && right === '🍺') {
       score = 8;
-      const totalScore = score + Number(refs.scoreNum.textContent);
-      refs.scoreNum.textContent = totalScore;
-    } else if (
-      refs.leftSimbol.textContent === '🇺🇦' &&
-      refs.centerSimbol.textContent === '🇺🇦' &&
-      refs.rightSimbol.textContent === '🇺🇦'
-    ) {
+      addScore(score);
+    } else if (left === '🇺🇦' && center === '🇺🇦' && right === '🇺🇦') {
       score = 30;
-      const totalScore = score + Number(refs.scoreNum.textContent);
-      refs.scoreNum.textContent = totalScore;
-    } else if (
-      refs.leftSimbol.textContent === '🍒' &&
-      refs.centerSimbol.textContent === '🍒' &&
-      refs.rightSimbol.textContent === '🍒'
-    ) {
+      addScore(score);
+    } else if (left === '🍒' && center === '🍒' && right === '🍒') {
       score = 5;
-      const totalScore = score + Number(refs.scoreNum.textContent);
-      refs.scoreNum.textContent = totalScore;
-    } else if (
-      refs.leftSimbol.textContent === '🍋' &&
-      refs.centerSimbol.textContent === '🍋' &&
-      refs.rightSimbol.textContent === '🍋'
-    ) {
+      addScore(score);
+    } else if (left === '🍋' && center === '🍋' && right === '🍋') {
       score = 8;
-      const totalScore = score + Number(refs.scoreNum.textContent);
-      refs.scoreNum.textContent = totalScore;
+      addScore(score);
     } else if (
-      (refs.leftSimbol.textContent === '🍔' &&
-        refs.centerSimbol.textContent === '🍔') ||
-      (refs.centerSimbol.textContent === '🍔' &&
-        refs.rightSimbol.textContent === '🍔')
+      (left === '🍔' && center === '🍔') ||
+      (center === '🍔' && right === '🍔')
     ) {
       score = 3;
-      const totalScore = score + Number(refs.scoreNum.textContent);
-      refs.scoreNum.textContent = totalScore;
+      addScore(score);
     } else if (
-      (refs.leftSimbol.textContent === '💰' &&
-        refs.centerSimbol.textContent === '💰') ||
-      (refs.centerSimbol.textContent === '💰' &&
-        refs.rightSimbol.textContent === '💰')
+      (left === '💰' && center === '💰') ||
+      (center === '💰' && right === '💰')
     ) {
       score = 3;
-      const totalScore = score + Number(refs.scoreNum.textContent);
-      refs.scoreNum.textContent = totalScore;
+      addScore(score);
     } else if (
-      (refs.leftSimbol.textContent === '🍺' &&
-        refs.centerSimbol.textContent === '🍺') ||
-      (refs.centerSimbol.textContent === '🍺' &&
-        refs.rightSimbol.textContent === '🍺')
+      (left === '🍺' && center === '🍺') ||
+      (center === '🍺' && right === '🍺')
     ) {
       score = 4;
-      const totalScore = score + Number(refs.scoreNum.textContent);
-      refs.scoreNum.textContent = totalScore;
+      addScore(score);
     } else if (
-      (refs.leftSimbol.textContent === '🇺🇦' &&
-        refs.centerSimbol.textContent === '🇺🇦') ||
-      (refs.centerSimbol.textContent === '🇺🇦' &&
-        refs.rightSimbol.textContent === '🇺🇦')
+      (left === '🇺🇦' && center === '🇺🇦') ||
+      (center === '🇺🇦' && right === '🇺🇦')
     ) {
       score = 15;
-      const totalScore = score + Number(refs.scoreNum.textContent);
-      refs.scoreNum.textContent = totalScore;
+      addScore(score);
     } else if (
-      (refs.leftSimbol.textContent === '🍒' &&
-        refs.centerSimbol.textContent === '🍒') ||
-      (refs.centerSimbol.textContent === '🍒' &&
-        refs.rightSimbol.textContent === '🍒')
+      (left === '🍒' && center === '🍒') ||
+      (center === '🍒' && right === '🍒')
     ) {
       score = 2;
-      const totalScore = score + Number(refs.scoreNum.textContent);
-      refs.scoreNum.textContent = totalScore;
+      addScore(score);
     } else if (
-      (refs.leftSimbol.textContent === '🍋' &&
-        refs.centerSimbol.textContent === '🍋') ||
-      (refs.centerSimbol.textContent === '🍋' &&
-        refs.rightSimbol.textContent === '🍋')
+      (left === '🍋' && center === '🍋') ||
+      (center === '🍋' && right === '🍋')
     ) {
       score = 2;
-      const totalScore = score + Number(refs.scoreNum.textContent);
-      refs.scoreNum.textContent = totalScore;
+      addScore(score);
     } else {
       const totalScore = Number(refs.scoreNum.textContent) - 1;
       refs.scoreNum.textContent = totalScore;
     }
   }, 3000);
+}
+
+function addScore(score) {
+  const totalScore = score + Number(refs.scoreNum.textContent);
+  refs.scoreNum.textContent = totalScore;
 }
