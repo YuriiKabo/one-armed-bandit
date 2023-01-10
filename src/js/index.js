@@ -9,29 +9,40 @@ const refs = {
   restNum: document.querySelector('.rest-num'),
   gameResult: document.querySelector('.your-win-numb'),
 };
-// console.log(Object.keys(refs));
+const {
+  leftSimbol,
+  centerSimbol,
+  rightSimbol,
+  btnStart,
+  scoreNum,
+  cont,
+  topUpBtn,
+  restNum,
+  gameResult,
+} = refs;
+
 disabledBtnStart();
 
 document.addEventListener('keydown', e => {
   if (e.key === ' ' || e.key === 'Enter') {
-    refs.btnStart.classList.add('start-button-enter');
+    btnStart.classList.add('start-button-enter');
   }
 });
 
 document.addEventListener('keyup', e => {
   if (e.key === ' ' || e.key === 'Enter') {
     onStartGame();
-    refs.btnStart.classList.remove('start-button-enter');
+    btnStart.classList.remove('start-button-enter');
   }
 });
 
-refs.btnStart.addEventListener('click', onStartGame);
-refs.topUpBtn.addEventListener('click', onCallPrompt);
+btnStart.addEventListener('click', onStartGame);
+topUpBtn.addEventListener('click', onCallPrompt);
 let investScore = 0;
 function onCallPrompt() {
   let result = prompt('Поповніть рахунок!', 20);
-  refs.scoreNum.textContent = Number(result);
-  refs.restNum.textContent = Number(result);
+  scoreNum.textContent = Number(result);
+  restNum.textContent = Number(result);
   investScore = Number(result);
 
   enabledBtnStart();
@@ -57,16 +68,16 @@ function onStartGame() {
 
 function totalResult() {
   setTimeout(() => {
-    let deltaScore = Number(refs.scoreNum.textContent) - investScore;
-    refs.gameResult.textContent = deltaScore;
+    let deltaScore = Number(scoreNum.textContent) - investScore;
+    gameResult.textContent = deltaScore;
   }, 3000);
 }
 
 function invertCountDown() {
   setTimeout(() => {
-    let restNumber = Number(refs.restNum.textContent) - 1;
-    refs.restNum.textContent = restNumber;
-    if (refs.restNum.textContent === '0') {
+    let restNumber = Number(restNum.textContent) - 1;
+    restNum.textContent = restNumber;
+    if (restNum.textContent === '0') {
       disabledBtnStart();
       alert('Гра закінчена!!!');
     }
@@ -74,13 +85,13 @@ function invertCountDown() {
 }
 
 function enabledBtnStart() {
-  refs.btnStart.disabled = false;
-  refs.btnStart.style.backgroundColor = '#ff0000';
+  btnStart.disabled = false;
+  btnStart.style.backgroundColor = '#ff0000';
 }
 
 function disabledBtnStart() {
-  refs.btnStart.disabled = true;
-  refs.btnStart.style.backgroundColor = '#ff9c9c';
+  btnStart.disabled = true;
+  btnStart.style.backgroundColor = '#ff9c9c';
 }
 
 function onStartFirstRandom() {
@@ -132,7 +143,7 @@ function numsEqSimbols1(random) {
       break;
   }
 
-  refs.leftSimbol.textContent = simbolOne;
+  leftSimbol.textContent = simbolOne;
 }
 
 function numsEqSimbols2(random) {
@@ -158,7 +169,7 @@ function numsEqSimbols2(random) {
       break;
   }
 
-  refs.centerSimbol.textContent = simbolTwo;
+  centerSimbol.textContent = simbolTwo;
 }
 function numsEqSimbols3(random) {
   let simbolThree = 0;
@@ -182,19 +193,19 @@ function numsEqSimbols3(random) {
       simbolThree = '💰';
       break;
   }
-  refs.rightSimbol.textContent = simbolThree;
+  rightSimbol.textContent = simbolThree;
 }
 function addScore(score) {
-  const totalScore = score + Number(refs.scoreNum.textContent);
-  refs.scoreNum.textContent = totalScore;
+  const totalScore = score + Number(scoreNum.textContent);
+  scoreNum.textContent = totalScore;
 }
 
 function on() {
   let score = 0;
   setTimeout(() => {
-    const left = refs.leftSimbol.textContent;
-    const center = refs.centerSimbol.textContent;
-    const right = refs.rightSimbol.textContent;
+    const left = leftSimbol.textContent;
+    const center = centerSimbol.textContent;
+    const right = rightSimbol.textContent;
     if (left === '🍔' && center === '🍔' && right === '🍔') {
       score = 7;
       addScore(score);
@@ -250,7 +261,7 @@ function on() {
       score = 2;
       addScore(score);
     }
-    const totalScore = Number(refs.scoreNum.textContent) - 1;
-    refs.scoreNum.textContent = totalScore;
+    const totalScore = Number(scoreNum.textContent) - 1;
+    scoreNum.textContent = totalScore;
   }, 3000);
 }
