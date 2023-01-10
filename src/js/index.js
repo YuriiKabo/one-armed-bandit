@@ -184,6 +184,10 @@ function numsEqSimbols3(random) {
   }
   refs.rightSimbol.textContent = simbolThree;
 }
+function addScore(score) {
+  const totalScore = score + Number(refs.scoreNum.textContent);
+  refs.scoreNum.textContent = totalScore;
+}
 
 function on() {
   let score = 0;
@@ -245,14 +249,8 @@ function on() {
     ) {
       score = 2;
       addScore(score);
-    } else {
-      const totalScore = Number(refs.scoreNum.textContent) - 1;
-      refs.scoreNum.textContent = totalScore;
     }
+    const totalScore = Number(refs.scoreNum.textContent) - 1;
+    refs.scoreNum.textContent = totalScore;
   }, 3000);
-}
-
-function addScore(score) {
-  const totalScore = score + Number(refs.scoreNum.textContent);
-  refs.scoreNum.textContent = totalScore;
 }
