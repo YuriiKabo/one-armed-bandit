@@ -9,40 +9,29 @@ const refs = {
   restNum: document.querySelector('.rest-num'),
   gameResult: document.querySelector('.your-win-numb'),
 };
-const {
-  leftSimbol,
-  centerSimbol,
-  rightSimbol,
-  btnStart,
-  scoreNum,
-  cont,
-  topUpBtn,
-  restNum,
-  gameResult,
-} = refs;
 
 disabledBtnStart();
 
 document.addEventListener('keydown', e => {
   if (e.key === ' ' || e.key === 'Enter') {
-    btnStart.classList.add('start-button-enter');
+    refs.btnStart.classList.add('start-button-enter');
   }
 });
 
 document.addEventListener('keyup', e => {
   if (e.key === ' ' || e.key === 'Enter') {
     onStartGame();
-    btnStart.classList.remove('start-button-enter');
+    refs.btnStart.classList.remove('start-button-enter');
   }
 });
 
-btnStart.addEventListener('click', onStartGame);
-topUpBtn.addEventListener('click', onCallPrompt);
+refs.btnStart.addEventListener('click', onStartGame);
+refs.topUpBtn.addEventListener('click', onCallPrompt);
 let investScore = 0;
 function onCallPrompt() {
-  let result = prompt('Поповніть рахунок!', 20);
-  scoreNum.textContent = Number(result);
-  restNum.textContent = Number(result);
+  let result = prompt('Поповніть рахунок!', 2);
+  refs.scoreNum.textContent = Number(result);
+  refs.restNum.textContent = Number(result);
   investScore = Number(result);
 
   enabledBtnStart();
@@ -56,212 +45,181 @@ function onCallPrompt() {
 // }, 3000);
 
 function onStartGame() {
-  onStartFirstRandom();
-  onStartSecondRandom();
-  onStartThirdRandom();
+  onStartRandom(1300, 'leftSimbol');
+  onStartRandom(2000, 'centerSimbol');
+  onStartRandom(2700, 'rightSimbol');
   on();
+  invertCountDown();
   totalResult();
-  setTimeout(() => {
-    invertCountDown();
-  }, 300);
 }
 
 function totalResult() {
   setTimeout(() => {
-    let deltaScore = Number(scoreNum.textContent) - investScore;
-    gameResult.textContent = deltaScore;
+    let deltaScore = Number(refs.scoreNum.textContent) - investScore;
+    refs.gameResult.textContent = deltaScore;
   }, 3000);
 }
 
 function invertCountDown() {
   setTimeout(() => {
-    let restNumber = Number(restNum.textContent) - 1;
-    restNum.textContent = restNumber;
-    if (restNum.textContent === '0') {
+    let restNumber = Number(refs.restNum.textContent) - 1;
+    refs.restNum.textContent = restNumber;
+    if (refs.restNum.textContent === '0') {
       disabledBtnStart();
-      alert('Гра закінчена!!!');
+      setTimeout(() => {
+        alert('Гра закінчена!!!');
+      }, 10);
     }
   }, 3000);
 }
 
 function enabledBtnStart() {
-  btnStart.disabled = false;
-  btnStart.style.backgroundColor = '#ff0000';
+  refs.btnStart.disabled = false;
+  refs.btnStart.style.backgroundColor = '#ff0000';
 }
 
 function disabledBtnStart() {
-  btnStart.disabled = true;
-  btnStart.style.backgroundColor = '#ff9c9c';
+  refs.btnStart.disabled = true;
+  refs.btnStart.style.backgroundColor = '#ff9c9c';
 }
 
-function onStartFirstRandom() {
+function onStartRandom(timeout, symbol) {
   const intId = setInterval(() => {
-    numsEqSimbols1(parseInt(Math.random() * 6));
+    makeSymbol(symbol);
     setTimeout(() => {
       clearInterval(intId);
-    }, 1300);
+    }, timeout);
   }, 70);
-}
-function onStartSecondRandom() {
-  const intId = setInterval(() => {
-    numsEqSimbols2(parseInt(Math.random() * 6));
-    setTimeout(() => {
-      clearInterval(intId);
-    }, 2000);
-  }, 70);
-}
-
-function onStartThirdRandom() {
-  const intId = setInterval(() => {
-    numsEqSimbols3(parseInt(Math.random() * 6));
-    setTimeout(() => {
-      clearInterval(intId);
-    }, 2700);
-  }, 70);
-}
-
-function numsEqSimbols1(random) {
-  let simbolOne = 0;
-  switch (random) {
-    case 0:
-      simbolOne = '🍔';
-      break;
-    case 1:
-      simbolOne = '🍋';
-      break;
-    case 2:
-      simbolOne = '🍒';
-      break;
-    case 3:
-      simbolOne = '🇺🇦';
-      break;
-    case 4:
-      simbolOne = '🍺';
-      break;
-    case 5:
-      simbolOne = '💰';
-      break;
-  }
-
-  leftSimbol.textContent = simbolOne;
-}
-
-function numsEqSimbols2(random) {
-  let simbolTwo = 0;
-  switch (random) {
-    case 0:
-      simbolTwo = '🍔';
-      break;
-    case 1:
-      simbolTwo = '🍋';
-      break;
-    case 2:
-      simbolTwo = '🍒';
-      break;
-    case 3:
-      simbolTwo = '🇺🇦';
-      break;
-    case 4:
-      simbolTwo = '🍺';
-      break;
-    case 5:
-      simbolTwo = '💰';
-      break;
-  }
-
-  centerSimbol.textContent = simbolTwo;
-}
-function numsEqSimbols3(random) {
-  let simbolThree = 0;
-  switch (random) {
-    case 0:
-      simbolThree = '🍔';
-      break;
-    case 1:
-      simbolThree = '🍋';
-      break;
-    case 2:
-      simbolThree = '🍒';
-      break;
-    case 3:
-      simbolThree = '🇺🇦';
-      break;
-    case 4:
-      simbolThree = '🍺';
-      break;
-    case 5:
-      simbolThree = '💰';
-      break;
-  }
-  rightSimbol.textContent = simbolThree;
-}
-function addScore(score) {
-  const totalScore = score + Number(scoreNum.textContent);
-  scoreNum.textContent = totalScore;
 }
 
 function on() {
   let score = 0;
   setTimeout(() => {
-    const left = leftSimbol.textContent;
-    const center = centerSimbol.textContent;
-    const right = rightSimbol.textContent;
-    if (left === '🍔' && center === '🍔' && right === '🍔') {
+    if (
+      refs.leftSimbol.textContent === '🍔' &&
+      refs.centerSimbol.textContent === '🍔' &&
+      refs.rightSimbol.textContent === '🍔'
+    ) {
       score = 7;
-      addScore(score);
-    } else if (left === '💰' && center === '💰' && right === '💰') {
+      const totalScore = score + Number(refs.scoreNum.textContent);
+      refs.scoreNum.textContent = totalScore;
+    } else if (
+      refs.leftSimbol.textContent === '💰' &&
+      refs.centerSimbol.textContent === '💰' &&
+      refs.rightSimbol.textContent === '💰'
+    ) {
       score = 12;
-      addScore(score);
-    } else if (left === '🍺' && center === '🍺' && right === '🍺') {
+      const totalScore = score + Number(refs.scoreNum.textContent);
+      refs.scoreNum.textContent = totalScore;
+    } else if (
+      refs.leftSimbol.textContent === '🍺' &&
+      refs.centerSimbol.textContent === '🍺' &&
+      refs.rightSimbol.textContent === '🍺'
+    ) {
       score = 8;
-      addScore(score);
-    } else if (left === '🇺🇦' && center === '🇺🇦' && right === '🇺🇦') {
+      const totalScore = score + Number(refs.scoreNum.textContent);
+      refs.scoreNum.textContent = totalScore;
+    } else if (
+      refs.leftSimbol.textContent === '🇺🇦' &&
+      refs.centerSimbol.textContent === '🇺🇦' &&
+      refs.rightSimbol.textContent === '🇺🇦'
+    ) {
       score = 30;
-      addScore(score);
-    } else if (left === '🍒' && center === '🍒' && right === '🍒') {
+      const totalScore = score + Number(refs.scoreNum.textContent);
+      refs.scoreNum.textContent = totalScore;
+    } else if (
+      refs.leftSimbol.textContent === '🍒' &&
+      refs.centerSimbol.textContent === '🍒' &&
+      refs.rightSimbol.textContent === '🍒'
+    ) {
       score = 5;
-      addScore(score);
-    } else if (left === '🍋' && center === '🍋' && right === '🍋') {
+      const totalScore = score + Number(refs.scoreNum.textContent);
+      refs.scoreNum.textContent = totalScore;
+    } else if (
+      refs.leftSimbol.textContent === '🍋' &&
+      refs.centerSimbol.textContent === '🍋' &&
+      refs.rightSimbol.textContent === '🍋'
+    ) {
       score = 8;
-      addScore(score);
+      const totalScore = score + Number(refs.scoreNum.textContent);
+      refs.scoreNum.textContent = totalScore;
     } else if (
-      (left === '🍔' && center === '🍔') ||
-      (center === '🍔' && right === '🍔')
+      (refs.leftSimbol.textContent === '🍔' &&
+        refs.centerSimbol.textContent === '🍔') ||
+      (refs.centerSimbol.textContent === '🍔' &&
+        refs.rightSimbol.textContent === '🍔')
     ) {
       score = 3;
-      addScore(score);
+      const totalScore = score + Number(refs.scoreNum.textContent);
+      refs.scoreNum.textContent = totalScore;
     } else if (
-      (left === '💰' && center === '💰') ||
-      (center === '💰' && right === '💰')
+      (refs.leftSimbol.textContent === '💰' &&
+        refs.centerSimbol.textContent === '💰') ||
+      (refs.centerSimbol.textContent === '💰' &&
+        refs.rightSimbol.textContent === '💰')
     ) {
       score = 3;
-      addScore(score);
+      const totalScore = score + Number(refs.scoreNum.textContent);
+      refs.scoreNum.textContent = totalScore;
     } else if (
-      (left === '🍺' && center === '🍺') ||
-      (center === '🍺' && right === '🍺')
+      (refs.leftSimbol.textContent === '🍺' &&
+        refs.centerSimbol.textContent === '🍺') ||
+      (refs.centerSimbol.textContent === '🍺' &&
+        refs.rightSimbol.textContent === '🍺')
     ) {
       score = 4;
-      addScore(score);
+      const totalScore = score + Number(refs.scoreNum.textContent);
+      refs.scoreNum.textContent = totalScore;
     } else if (
-      (left === '🇺🇦' && center === '🇺🇦') ||
-      (center === '🇺🇦' && right === '🇺🇦')
+      (refs.leftSimbol.textContent === '🇺🇦' &&
+        refs.centerSimbol.textContent === '🇺🇦') ||
+      (refs.centerSimbol.textContent === '🇺🇦' &&
+        refs.rightSimbol.textContent === '🇺🇦')
     ) {
       score = 15;
-      addScore(score);
+      const totalScore = score + Number(refs.scoreNum.textContent);
+      refs.scoreNum.textContent = totalScore;
     } else if (
-      (left === '🍒' && center === '🍒') ||
-      (center === '🍒' && right === '🍒')
+      (refs.leftSimbol.textContent === '🍒' &&
+        refs.centerSimbol.textContent === '🍒') ||
+      (refs.centerSimbol.textContent === '🍒' &&
+        refs.rightSimbol.textContent === '🍒')
     ) {
       score = 2;
-      addScore(score);
+      const totalScore = score + Number(refs.scoreNum.textContent);
+      refs.scoreNum.textContent = totalScore;
     } else if (
-      (left === '🍋' && center === '🍋') ||
-      (center === '🍋' && right === '🍋')
+      (refs.leftSimbol.textContent === '🍋' &&
+        refs.centerSimbol.textContent === '🍋') ||
+      (refs.centerSimbol.textContent === '🍋' &&
+        refs.rightSimbol.textContent === '🍋')
     ) {
       score = 2;
-      addScore(score);
+      const totalScore = score + Number(refs.scoreNum.textContent);
+      refs.scoreNum.textContent = totalScore;
+    } else {
+      const totalScore = Number(refs.scoreNum.textContent) - 1;
+      refs.scoreNum.textContent = totalScore;
     }
-    const totalScore = Number(scoreNum.textContent) - 1;
-    scoreNum.textContent = totalScore;
   }, 3000);
+}
+
+function makeSymbol(simbolPlace) {
+  const random = parseInt(Math.random() * 6);
+
+  if (random === 0) {
+    simbol = '🍔';
+  } else if (random === 1) {
+    simbol = '🍋';
+  } else if (random === 2) {
+    simbol = '🍒';
+  } else if (random === 3) {
+    simbol = '🇺🇦';
+  } else if (random === 4) {
+    simbol = '🍺';
+  } else if (random === 5) {
+    simbol = '💰';
+  }
+
+  refs[simbolPlace].textContent = simbol;
 }
